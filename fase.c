@@ -8,11 +8,13 @@
 #include <stdbool.h>
 
 void phaseOne(Jogador *players, int *cenaAtual, Cenas *cena, Sound sound){
+    
     if (*cenaAtual == 5){ //tranca da porta
         //if (players->key[0] == false && (players->posX >= 480 && players->posX <= 615) && (players->posY >= 620 && players->posY <= 650)){
         //    // imprimir "a porta está trancada, embaixo do vaso blah blah blah" na tela
         //}
-        /*else*/ if ((*players).key[0] == true && (players->posX >= 480 && players->posX <= 615) && (players->posY >= 620 && players->posY <= 650)){
+        /*else*/ 
+        if ((*players).key[0] == true && (players->posX >= 480 && players->posX <= 615) && (players->posY >= 620 && players->posY <= 650)){
             players->itens[0] = false;
         }    
     }
@@ -23,7 +25,6 @@ void phaseOne(Jogador *players, int *cenaAtual, Cenas *cena, Sound sound){
         PlaySound(sound);
     }    
 }
-
 
 void phaseTwo(Jogador *player, int *cenaAtual, Cenas *cena, Sound sound, int* pato){
     //.1 pegar maca na cozinha

@@ -18,11 +18,12 @@ typedef struct{
     int qtdPortas;
 } Cenas;
 
-void criarCenas(Cenas **cenas);
+Cenas* criarCenas(int numCenas);
 
 int colisaoMapa(Rectangle player, Cenas cena);
 
 int trocarCena(Rectangle player, float *x, float *y, Cenas cena, int *cenaAtual);
 
+void freeCenas(Cenas* cenas,int numCenas);
 
 #endif

@@ -1,10 +1,11 @@
 #include "raylib.h"
 #include "colisoes.h"
 #include "animacao.h"
-#include "itens.h"
 #include "player.h"
+#include "textures.h"
 #include <stdio.h>
 #include <stdlib.h>
+
 
 #define NUM_FRAMES  5
 
@@ -18,109 +19,25 @@ int main(void)
 
     Vector2 position = { (float)screenWidth/2, (float)screenHeight/2 };
     
+    Texture* TexturasD = InitTex();
 
-    Texture mn1 = LoadTexture("assets/Menu/menu001.png");
-    Texture mn2 = LoadTexture("assets/Menu/menub001.png");
-    Texture mn3 = LoadTexture("assets/Menu/menu003.png");
-    Texture mn4 = LoadTexture("assets/Menu/menu004.png");
-    Texture mn5 = LoadTexture("assets/Menu/menu005.png");
-    Texture mn6 = LoadTexture("assets/Menu/menu006.png");
+    Texture2D* Texturas2D = InitiTex2D();
 
-    Texture2D BotaoStart = LoadTexture("assets/Menu/botaojogar.png");
-    Texture2D BotaoSobre= LoadTexture("assets/Menu/botaosobre.png");
-    Texture2D BotaoInst = LoadTexture ("assets/Menu/botaoinst.png");
-    Texture2D BotaoFechar = LoadTexture("assets/Menu/botaoclose.png");
-    Texture2D Titulo = LoadTexture("assets/Menu/title.png");
-    Texture2D Lupa = LoadTexture("assets/Menu/lupa.png");
+    Texture2D* Texturas2Ditens = InitiTex2DI();
 
-    Texture fundo = LoadTexture("assets/img005.png");
-    Texture fundo1 = LoadTexture("assets/img0051.png");
-    Texture sala = LoadTexture("assets/img006.png");
-    Texture sala1 = LoadTexture("assets/img0061.png");
-    Texture fora = LoadTexture("assets/img008.png");
-    Texture fora1 = LoadTexture("assets/img0081.png");
-    Texture fora2 = LoadTexture("assets/img009.png");
-    Texture fora3 = LoadTexture("assets/img0011.png");
-    Texture fora4 = LoadTexture("assets/img00111.png");
-    Texture casavizin = LoadTexture("assets/img0010.png");
-    Texture casavizin1 = LoadTexture("assets/img00101.png");
-    Texture casavizin2 = LoadTexture("assets/img00102.png");
-    Texture salav = LoadTexture("assets/img0013.png");
-    Texture cozinhav = LoadTexture("assets/img0014.png");
-    Texture cozinhav1 = LoadTexture("assets/img00141.png");
-    Texture quarto = LoadTexture("assets/img0012.png");
-    Texture quarto1 = LoadTexture("assets/img00121.png");
-    Texture quarto2 = LoadTexture("assets/img00122.png");
-    Texture quarto3 = LoadTexture("assets/img00123.png");
-    Texture quarto4 = LoadTexture("assets/img00124.png");
-    Texture quarto5 = LoadTexture("assets/img00125.png");
-    Texture quarto6 = LoadTexture("assets/img00126.png");
-    Texture quarto7 = LoadTexture("assets/img00127.png");
-    Texture salav1 = LoadTexture("assets/img00131.png");
-    Texture estantef = LoadTexture("assets/img00132.png");
-    Texture salaopened = LoadTexture("assets/img00134.png");
-    Texture banheiro = LoadTexture("assets/img00151.png");
-    Texture selva = LoadTexture("assets/img0016.png");
-    Texture cacto = LoadTexture("assets/img00129.png");
-    Texture cactoFlor = LoadTexture("assets/img001210.png");
-    Texture gaveta = LoadTexture("assets/img00122.png");
+    InitAudioDevice();                                      
+    Music music = LoadMusicStream("assets/sons/MusicaTeste.mp3");  
+           
+    PlayMusicStream(music);                                 
+    Sound sound = LoadSound("assets/sons/PokemonA.wav");
 
 
+    Cenas* cenas = criarCenas(23); 
+   
 
-    Texture senha1 = LoadTexture("assets/Menu/lonb01.png");
-    Texture senha2 = LoadTexture("assets/Menu/lonb02.png");
-    Texture senha3 = LoadTexture("assets/Menu/lonb03.png");
-    Texture senha4 = LoadTexture("assets/Menu/lonb00.png");
-    Texture senha5 = LoadTexture("assets/Menu/lonb04.png");
-
-    Texture feixeHorizontal = LoadTexture("assets/img00126.png");
-    Texture feixeVertical1 = LoadTexture("assets/img00125.png");
-    Texture feixeVertical2 = LoadTexture("assets/img00127.png");
-
-    Texture salalab1 = LoadTexture("assets/puzzle estante/qt001.png");
-    Texture salalab2 = LoadTexture("assets/puzzle estante/qt002.png");
-    Texture salalab3 = LoadTexture("assets/puzzle estante/qt003.png");
-    Texture salalab4 = LoadTexture("assets/puzzle estante/qt004.png");
-    Texture salalab5 = LoadTexture("assets/puzzle estante/qt005.png");
-    Texture salalab6 = LoadTexture("assets/puzzle estante/qt006.png");
-    Texture salalab7 = LoadTexture("assets/puzzle estante/qt007.png");
-    Texture salalab8 = LoadTexture("assets/puzzle estante/qt008.png");
-    Texture salalab9 = LoadTexture("assets/puzzle estante/qt009.png");
-
-    Texture num1 = LoadTexture("assets/puzzle estante/num23.png");
-    Texture num2 = LoadTexture("assets/puzzle estante/num11.png");
-    Texture num3 = LoadTexture("assets/puzzle estante/num02.png");
-    Texture num4 = LoadTexture("assets/puzzle estante/num31.png");
-    Texture num5 = LoadTexture("assets/puzzle estante/num79.png");
-    Texture num6 = LoadTexture("assets/puzzle estante/num09.png");
-    Texture num7 = LoadTexture("assets/puzzle estante/num01.png");
-    Texture num8 = LoadTexture("assets/puzzle estante/num03.png");
-    Texture num9 = LoadTexture("assets/puzzle estante/num15.png");
-
-    Texture final1 = LoadTexture("assets/final001.png");
-
-    Texture2D Player =  LoadTexture("assets/personagemov.png");
-    Texture2D vizin = LoadTexture("assets/vizin.png");
-    Texture2D Pato =  LoadTexture("assets/pato.png");
-    Texture2D fogo =  LoadTexture("assets/img00133.png");
-    Texture2D espelho = LoadTexture("assets/img00128.png");
-
-    Texture texturas[64]= {mn1, mn2, mn3, mn4, mn5, mn6, fundo, fundo1, sala, sala1, fora, fora1,
-                           fora2, fora3, fora4, casavizin, casavizin1, casavizin2, salav, cozinhav, cozinhav1, quarto, quarto1, quarto2, quarto3, quarto4, quarto5,
-                           quarto6, quarto7, salav1, estantef, salaopened, banheiro, selva, cacto, cactoFlor, gaveta, senha1, senha2, senha3, senha4, senha5, 
-                           feixeHorizontal, feixeVertical1, feixeVertical2, salalab1, salalab2, salalab3, salalab4, salalab5, salalab6, salalab7, salalab8, salalab9, 
-                           num1, num2, num3, num4, num5, num6, num7, num8, num9, final1
-                          };
-    Texture2D texturas2d[6] = {BotaoStart, BotaoSobre, BotaoInst, BotaoFechar, Titulo, Lupa};
-
- 
-    Texture2D *texturasDeItens;
-    int qtdItens = 5;
-    texturasDeItens = (Texture2D *) calloc(qtdItens, sizeof(Texture2D));
-    gerarItens(&texturasDeItens);
     ////Joao's code ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-    float FrameWidth = (float) (Player.width/6);
+    float FrameWidth = (float) (Texturas2D[6].width/6);
     float x = 10;
     float y = 10;                                                 //PLAYER;
     int frame = 1;
@@ -129,28 +46,19 @@ int main(void)
     Rectangle Fire;        
     Vector2 f = {942, 50};                         //FOGO;
  
-    float FrameWidth2 = (float) (Pato.width/3);
+    float FrameWidth2 = (float) (Texturas2D[8].width/3);
     float px = 1200;
     float py = 401;                                         //PATO; --- COMIDA++ QUANDO O PATO RECEBE COMIDA;
     int frame2 = 1; 
     float Mov2 = 2;
     int PatoFlag = 0;
-    Rectangle patoHitbox = {px, py, FrameWidth2, Pato.height/4};
+    Rectangle patoHitbox = {px, py, FrameWidth2, Texturas2D[8].height/4};
 
-    InitAudioDevice();                                      //TESTANDO MUSICA
-    Music music = LoadMusicStream("assets/sons/MusicaTeste.mp3");          //TESTANDO MUSICA
-    PlayMusicStream(music);                                 //TESTANDO MUSICA
-    Sound sound = LoadSound("assets/sons/PokemonA.wav");
     
-
-
     /////Quinha's code///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    
     Vector2 nextPosition = { (float)screenWidth/2 + 100, (float)screenHeight/2};
-    Cenas *cenas;
-    cenas = (Cenas *) malloc (23 * sizeof(Cenas));
-    criarCenas(&cenas); 
     Rectangle player = {position.x, position.y, 100, 80};
     
 
@@ -166,34 +74,34 @@ int main(void)
     
     //Botao Jogar:
     
-    float frameHeightstart = (float)BotaoStart.height/NUM_FRAMES;
-    Rectangle sourceRecstart = {0, 0,(float)BotaoStart.width, frameHeightstart+110};
-    Rectangle btnStartrec = { 200,500,(float)BotaoStart.width, frameHeightstart+110};
+    float frameHeightstart = (float)Texturas2D[0].height/NUM_FRAMES;
+    Rectangle sourceRecstart = {0, 0,(float)Texturas2D[0].width, frameHeightstart+110};
+    Rectangle btnStartrec = { 200,500,(float)Texturas2D[0].width, frameHeightstart+110};
     int btnstart = 0;
     int btnActionstart = false;
     
  
     //Botao Sobre:
     
-    float frameHeightsobre = (float)BotaoStart.height/NUM_FRAMES;
-    Rectangle sourceRecsobre = {0, 0,(float)BotaoSobre.width, frameHeightsobre+110};
-    Rectangle btnSobrerec = { 200, 620,(float)BotaoSobre.width, frameHeightsobre+110};
+    float frameHeightsobre = (float)Texturas2D[0].height/NUM_FRAMES;
+    Rectangle sourceRecsobre = {0, 0,(float)Texturas2D[1].width, frameHeightsobre+110};
+    Rectangle btnSobrerec = { 200, 620,(float)Texturas2D[1].width, frameHeightsobre+110};
     int btnsobre = 0;
     int btnActionsobre = false;
     
     //Botao Instrucoes:
     
-    float frameHeightinst = (float)BotaoInst.height/NUM_FRAMES;
-    Rectangle sourceRecinst = {0, 0,(float)BotaoInst.width, frameHeightinst+110};
-    Rectangle btnInstrec = { 200, 740,(float)BotaoInst.width, frameHeightinst+110};
+    float frameHeightinst = (float)Texturas2D[2].height/NUM_FRAMES;
+    Rectangle sourceRecinst = {0, 0,(float)Texturas2D[2].width, frameHeightinst+110};
+    Rectangle btnInstrec = { 200, 740,(float)Texturas2D[2].width, frameHeightinst+110};
     int btninst = 0;
     int btnActioninst = false;
     
     //Botao Fechar:
     
-    float frameHeightfechar = (float)BotaoFechar.height/NUM_FRAMES;
-    Rectangle sourceRecfechar = {0, 0,(float)BotaoFechar.width, frameHeightfechar+100};
-    Rectangle btnFecharrec = { 1650, 80,(float)BotaoFechar.width, frameHeightfechar+100};
+    float frameHeightfechar = (float)Texturas2D[3].height/NUM_FRAMES;
+    Rectangle sourceRecfechar = {0, 0,(float)Texturas2D[3].width, frameHeightfechar+100};
+    Rectangle btnFecharrec = { 1650, 80,(float)Texturas2D[3].width, frameHeightfechar+100};
     int btnfechar = 0;
     int btnActionfechar = false;
 
@@ -205,7 +113,6 @@ int main(void)
     int framesCounter4 = 0;
     int framesCounter5 = 0;
     int framesCounter6 = 0;
-    
     int framesCounter7 = 0;
     //variavel para iniciar o jogo
     
@@ -237,42 +144,42 @@ int main(void)
 
 
     //senha 1
-    float frameHeights1 = (float)senha1.height/NUM_FRAMES;
-    Rectangle sourceRecs1 = {0, 0,(float)senha1.width, frameHeights1+200};
-    Rectangle btnS1rec = { 600, 400,(float)senha1.width, frameHeights1+200};
+    float frameHeights1 = (float)TexturasD[37].height/NUM_FRAMES;
+    Rectangle sourceRecs1 = {0, 0,(float)TexturasD[37].width, frameHeights1+200};
+    Rectangle btnS1rec = { 600, 400,(float)TexturasD[37].width, frameHeights1+200};
     int btns1 = 0;
     int btnActions1 = false;
    
     
     // senha 2
-    float frameHeights2 = (float)senha2.height/NUM_FRAMES;
-    Rectangle sourceRecs2 = {0, 0,(float)senha2.width, frameHeights2+200};
-    Rectangle btnS2rec = { 200, 600,(float)senha2.width, frameHeights2+200};
+    float frameHeights2 = (float)TexturasD[38].height/NUM_FRAMES;
+    Rectangle sourceRecs2 = {0, 0,(float)TexturasD[38].width, frameHeights2+200};
+    Rectangle btnS2rec = { 200, 600,(float)TexturasD[38].width, frameHeights2+200};
     int btns2 = 0;
     int btnActions2 = false;
     
     //senha 3
     
-    float frameHeights3 = (float)senha3.height/NUM_FRAMES;
-    Rectangle sourceRecs3 = {0, 0,(float)senha3.width, frameHeights3+180};
-    Rectangle btnS3rec = { 1000, 600,(float)senha3.width, frameHeights3+180};
+    float frameHeights3 = (float)TexturasD[39].height/NUM_FRAMES;
+    Rectangle sourceRecs3 = {0, 0,(float)TexturasD[39].width, frameHeights3+180};
+    Rectangle btnS3rec = { 1000, 600,(float)TexturasD[39].width, frameHeights3+180};
     int btns3 = 0;
     int btnActions3 = false;
     
     //senha 4
    
     
-    float frameHeights4 = (float)senha4.height/NUM_FRAMES;
-    Rectangle sourceRecs4 = {0, 0,(float)senha4.width, frameHeights4+180};
-    Rectangle btnS4rec = { 200, 800,(float)senha4.width, frameHeights4+180};
+    float frameHeights4 = (float)TexturasD[40].height/NUM_FRAMES;
+    Rectangle sourceRecs4 = {0, 0,(float)TexturasD[40].width, frameHeights4+180};
+    Rectangle btnS4rec = { 200, 800,(float)TexturasD[40].width, frameHeights4+180};
     int btns4 = 0;
     int btnActions4 = false;
     
     //senha 5
     
-    float frameHeights5 = (float)senha5.height/NUM_FRAMES;
-    Rectangle sourceRecs5 = {0, 0,(float)senha5.width, frameHeights5+180};
-    Rectangle btnS5rec = { 1000, 800,(float)senha5.width, frameHeights5+180};
+    float frameHeights5 = (float)TexturasD[41].height/NUM_FRAMES;
+    Rectangle sourceRecs5 = {0, 0,(float)TexturasD[41].width, frameHeights5+180};
+    Rectangle btnS5rec = { 1000, 800,(float)TexturasD[41].width, frameHeights5+180};
     int btns5 = 0;
     int btnActions5 = false;
 
@@ -373,7 +280,7 @@ int main(void)
                   //animacao das nuvens:
                   movnuvens -= 0.3f;
         
-                  if (movnuvens <= -mn5.width*2) movnuvens = 0;
+                  if (movnuvens <= -(TexturasD[4]).width*2) movnuvens = 0;
         
                   //checando colisao do mouse com os botoes:
                   
@@ -572,21 +479,21 @@ int main(void)
                 case 1:
                 {
                     
-                    DrawTextureEx(mn5, (Vector2) {movnuvens, -100}, 0.0f, 2.0f, WHITE);//textura das nuvens->telacarreg
-                    DrawTexture(mn3, 0, 0, RAYWHITE); //textura da grama -> teladecarregamento 
-                    DrawTextureEx(mn5, (Vector2){ mn5.width*2 + movnuvens, -100}, 0.0f, 2.0f, WHITE);
-                    DrawTexture(mn4, 0, 0, RAYWHITE);//textura da casa
-                    DrawTexture(Titulo, 0, 0, RAYWHITE);//textura da casa
-                    DrawTextureRec(BotaoStart, sourceRecstart, (Vector2){ btnStartrec.x, btnStartrec.y}, WHITE);//texturabotao
-                    DrawTextureRec(BotaoSobre, sourceRecsobre, (Vector2){ btnSobrerec.x, btnSobrerec.y}, WHITE);//texturabotao
-                    DrawTextureRec(BotaoInst, sourceRecinst, (Vector2){ btnInstrec.x, btnInstrec.y}, WHITE);//texturabotao
+                    DrawTextureEx(TexturasD[4], (Vector2) {movnuvens, -100}, 0.0f, 2.0f, WHITE);//textura das nuvens->telacarreg
+                    DrawTexture(TexturasD[2], 0, 0, RAYWHITE); //textura da grama -> teladecarregamento 
+                    DrawTextureEx(TexturasD[4], (Vector2){ TexturasD[4].width*2 + movnuvens, -100}, 0.0f, 2.0f, WHITE);
+                    DrawTexture(TexturasD[3], 0, 0, RAYWHITE);//textura da casa
+                    DrawTexture(Texturas2D[4], 0, 0, RAYWHITE);//textura da casa
+                    DrawTextureRec(Texturas2D[0], sourceRecstart, (Vector2){ btnStartrec.x, btnStartrec.y}, WHITE);//texturabotao
+                    DrawTextureRec(Texturas2D[1], sourceRecsobre, (Vector2){ btnSobrerec.x, btnSobrerec.y}, WHITE);//texturabotao
+                    DrawTextureRec(Texturas2D[2], sourceRecinst, (Vector2){ btnInstrec.x, btnInstrec.y}, WHITE);//texturabotao
                   
                     //mudando cor do botao qnd passa o mouse por cima
-                    if(btnstart){DrawTextureRec(BotaoStart, sourceRecstart, (Vector2){ btnStartrec.x, btnStartrec.y}, LIGHTGRAY);}
+                    if(btnstart){DrawTextureRec(Texturas2D[0], sourceRecstart, (Vector2){ btnStartrec.x, btnStartrec.y}, LIGHTGRAY);}
                    
-                    if(btnsobre){DrawTextureRec(BotaoSobre, sourceRecsobre, (Vector2){ btnSobrerec.x, btnSobrerec.y},LIGHTGRAY);}
+                    if(btnsobre){DrawTextureRec(Texturas2D[1], sourceRecsobre, (Vector2){ btnSobrerec.x, btnSobrerec.y},LIGHTGRAY);}
                     
-                    if(btninst) {DrawTextureRec(BotaoInst, sourceRecinst, (Vector2){ btnInstrec.x, btnInstrec.y},LIGHTGRAY);}
+                    if(btninst) {DrawTextureRec(Texturas2D[2], sourceRecinst, (Vector2){ btnInstrec.x, btnInstrec.y},LIGHTGRAY);}
                     
                     
                 }break;
@@ -596,7 +503,7 @@ int main(void)
                 //carregando texturas da tela que aparece antes do jogo comecar
                 
                // DrawTexture(mn1, 0, 0, WHITE);
-                DrawTexture(mn6, 0, 0, WHITE);
+                DrawTexture(TexturasD[5], 0, 0, WHITE);
                 DrawText(TextSubtext(messagejogar1, 0, framesCounter1/3), 130, 160, 40, BLACK);
                 DrawText(TextSubtext(messagejogar2, 0, framesCounter2/3), 130, 220, 40, BLACK);
                 DrawText(TextSubtext(messagejogar3, 0, framesCounter3/3), 130, 280, 40, BLACK);
@@ -610,16 +517,16 @@ int main(void)
                     //texturas da tela "sobre"
                     
                   //  DrawTexture(mn1, 0, 0, WHITE);
-                    DrawTexture(mn6, 0, 0, WHITE);
-                    DrawTexture(Lupa, 1070, 110, WHITE);
+                    DrawTexture(TexturasD[5], 0, 0, WHITE);
+                    DrawTexture(Texturas2D[5], 1070, 110, WHITE);
                     DrawText("SOBRE", 680, 100, 100, BLACK);
                     DrawText(messagesobre1, 200, 240, 40, DARKBROWN);
                     DrawText(messagesobre2, 200, 300, 40, DARKBROWN);
                     DrawText(messagesobre3, 200, 360, 40, DARKBROWN);
-                    DrawTextureRec(BotaoFechar, sourceRecfechar, (Vector2){ btnFecharrec.x, btnFecharrec.y}, WHITE);
+                    DrawTextureRec(Texturas2D[3], sourceRecfechar, (Vector2){ btnFecharrec.x, btnFecharrec.y}, WHITE);
                     
                     //mudando cor do botao "fechar"
-                   if(btnfechar){DrawTextureRec(BotaoFechar, sourceRecfechar, (Vector2){ btnFecharrec.x, btnFecharrec.y},RED);}
+                   if(btnfechar){DrawTextureRec(Texturas2D[3], sourceRecfechar, (Vector2){ btnFecharrec.x, btnFecharrec.y},RED);}
                    
                     
                 }break;
@@ -628,20 +535,20 @@ int main(void)
                 {
                     //carregando texturas da tela de instrucoes
                     
-                    DrawTexture(mn1, 0, 0, DARKBROWN);
-                    DrawTexture(mn6, 0, 0, WHITE);
+                    DrawTexture(TexturasD[0], 0, 0, DARKBROWN);
+                    DrawTexture(TexturasD[5], 0, 0, WHITE);
                     DrawText("INSTRUçÕES", 320, 120, 100,BLACK);
-                    DrawTexture(Lupa, 1000, 130, WHITE);
+                    DrawTexture(Texturas2D[5], 1000, 130, WHITE);
                     DrawText(messageinst1, 300, 320, 30, BLACK);
                     DrawText(messageinst2, 300, 380, 30, BLACK);
                     DrawText(messageinst3, 300, 440, 30, BLACK);
                     DrawText(messageinst4, 300, 500, 30, BLACK);
                     DrawText(messageinst5, 300, 560, 30, BLACK);
                     DrawText(messageinst6, 300, 620, 30, BLACK);
-                    DrawTextureRec(BotaoFechar, sourceRecfechar, (Vector2){ btnFecharrec.x, btnFecharrec.y}, WHITE);
+                    DrawTextureRec(Texturas2D[3], sourceRecfechar, (Vector2){ btnFecharrec.x, btnFecharrec.y}, WHITE);
                     
                     //mudando cor do botao "fechar"
-                    if(btnfechar){DrawTextureRec(BotaoFechar, sourceRecfechar, (Vector2){ btnFecharrec.x, btnFecharrec.y},RED);}
+                    if(btnfechar){DrawTextureRec(Texturas2D[3], sourceRecfechar, (Vector2){ btnFecharrec.x, btnFecharrec.y},RED);}
                     
                 }break;
                 
@@ -652,100 +559,100 @@ int main(void)
             
             else if(cena == 1){
 
-                DrawTexture(fundo,0,0,WHITE);
-                DrawTexture(fundo1,0,0,WHITE);
+                DrawTexture(TexturasD[6],0,0,WHITE);
+                DrawTexture(TexturasD[7],0,0,WHITE);
              
                  
             }
         
             else  if(cena ==2){
 
-                DrawTexture(sala,0,0,WHITE);
-                DrawTexture(sala1,0,0,WHITE);
+                DrawTexture(TexturasD[8],0,0,WHITE);
+                DrawTexture(TexturasD[9],0,0,WHITE);
              
             }
 
             else if(cena==3){
 
-                DrawTexture(fora,0,0,WHITE );
-                DrawTexture(fora1,0,0,WHITE );
+                DrawTexture(TexturasD[10],0,0,WHITE );
+                DrawTexture(TexturasD[11],0,0,WHITE );
              
 
             }
 
             else if(cena==4){
 
-                DrawTexture(fora2,0,0,WHITE );
+                DrawTexture(TexturasD[12],0,0,WHITE );
               
 
             }
 
             else if(cena==5){
 
-                DrawTexture(casavizin,0,0,WHITE);
-                DrawTexture(casavizin1,0,0,WHITE);
+                DrawTexture(TexturasD[15],0,0,WHITE);
+                DrawTexture(TexturasD[16],0,0,WHITE);
                 if(cenas[5].portas[2].check == 0) DrawText("O vizinho geralmente deixa a chave embaixo do vaso", 0, 0, 45, WHITE);
             }
              
             else if(cena==6){
 
-                DrawTexture(fora3,0,0,WHITE );
-                DrawTexture(fora4,0,0,WHITE );
+                DrawTexture(TexturasD[13],0,0,WHITE );
+                DrawTexture(TexturasD[14],0,0,WHITE );
 
             }
 
             else if(cena==7){
 
-                DrawTexture(salav,0,0,WHITE);
-                DrawTexture(salav1,0,0,WHITE);
+                DrawTexture(TexturasD[18],0,0,WHITE);
+                DrawTexture(TexturasD[29],0,0,WHITE);
                 jogador.itens[0] = false;
-                Fire = AnimFogo(fogo);
-                DrawTextureRec(fogo, Fire, f, RAYWHITE);
+                Fire = AnimFogo(Texturas2D[9]);
+                DrawTextureRec(Texturas2D[9], Fire, f, RAYWHITE);
 
             }
 
             else if(cena==8){
 
-                DrawTexture(cozinhav,0,0,WHITE );
-                DrawTexture(cozinhav1,0,0,WHITE );
+                DrawTexture(TexturasD[19],0,0,WHITE );
+                DrawTexture(TexturasD[20],0,0,WHITE );
              
             }
 
             else if(cena==9){
 
-                DrawTexture(quarto,0,0,WHITE);
-                DrawTexture(quarto1,0,0,WHITE);
-                DrawTexture(quarto4,0,0,WHITE);
-                DrawTexture(cacto, 0, 0,WHITE);
-                AnimEspelho(espelho, frameEsp1, 1000, 700);
-                AnimEspelho(espelho, frameEsp2, 130, 700);
+                DrawTexture(TexturasD[21],0,0,WHITE);
+                DrawTexture(TexturasD[22],0,0,WHITE);
+                DrawTexture(TexturasD[25],0,0,WHITE);
+                DrawTexture(TexturasD[34], 0, 0,WHITE);
+                AnimEspelho(Texturas2D[10], frameEsp1, 1000, 700);
+                AnimEspelho(Texturas2D[10], frameEsp2, 130, 700);
                 Vector2 vec2 = {px, py};
-                AnimPato(Pato, FrameWidth2, &frame2, &Mov2, &px, &py, &nextPosition.x, &nextPosition.y, &Mov, PatoFlag);
-                Rectangle Duck = {FrameWidth2*frame2, Pato.height/Mov2, FrameWidth2, (float) Pato.height/4};      //PATO - APENAS NA FASE DO PATO;
-                DrawTextureRec(Pato, Duck, vec2, RAYWHITE);
+                AnimPato(Texturas2D[8], FrameWidth2, &frame2, &Mov2, &px, &py, &nextPosition.x, &nextPosition.y, &Mov, PatoFlag);
+                Rectangle Duck = {FrameWidth2*frame2, Texturas2D[8].height/Mov2, FrameWidth2, (float) Texturas2D[8].height/4};      //PATO - APENAS NA FASE DO PATO;
+                DrawTextureRec(Texturas2D[8], Duck, vec2, RAYWHITE);
                 patoHitbox.x = px;
                 patoHitbox.y = py;
-                DrawTexture(feixeVertical1,0,0,WHITE);
+                DrawTexture(TexturasD[43],0,0,WHITE);
                 if(jogador.key[1]==false) DrawText("O pato parece estar com fome", 0, 0, 45, WHITE);
-                if(frameEsp1==0) DrawTexture(feixeHorizontal,0,80,WHITE);
+                if(frameEsp1==0) DrawTexture(TexturasD[42],0,80,WHITE);
                 if(frameEsp1==0 && frameEsp2==2) {
-                    DrawTexture(gaveta,0,0,WHITE);
-                    DrawTexture(feixeVertical2,0,20,WHITE);
-                    DrawTexture(cactoFlor, 0, 0,WHITE);
+                    DrawTexture(TexturasD[36],0,0,WHITE);
+                    DrawTexture(TexturasD[44],0,20,WHITE);
+                    DrawTexture(TexturasD[35], 0, 0,WHITE);
                 }
             }
 
             else if(cena==10){
 
-                DrawTexture(banheiro,0,0,WHITE);
+                DrawTexture(TexturasD[32],0,0,WHITE);
               
 
             }
 
             else if(cena==11){
         
-                DrawTexture(selva,0,0,WHITE);
-                DrawTexture(vizin, 660, 240, WHITE);
+                DrawTexture(TexturasD[33],0,0,WHITE);
+                DrawTexture(Texturas2D[7], 660, 240, WHITE);
 
             }
 
@@ -753,66 +660,66 @@ int main(void)
 
             else if(cena==12){
 
-                DrawTexture(salalab1,0,0,WHITE);
-                DrawTexture(num1,0,10,WHITE);
+                DrawTexture(TexturasD[45],0,0,WHITE);
+                DrawTexture(TexturasD[54],0,10,WHITE);
                 jogador.itens[2] = false;
 
             }
 
             else if(cena==13){
 
-                DrawTexture(salalab2,0,0,WHITE);
-                DrawTexture(num2,0,10,WHITE);
+                DrawTexture(TexturasD[46],0,0,WHITE);
+                DrawTexture(TexturasD[55],0,10,WHITE);
 
             }
 
             else if(cena==14){
 
-                DrawTexture(salalab3,0,0,WHITE);
-                DrawTexture(num3,0,10,WHITE);
+                DrawTexture(TexturasD[47],0,0,WHITE);
+                DrawTexture(TexturasD[56],0,10,WHITE);
 
             }
 
             else if(cena==15){
 
-                DrawTexture(salalab4,0,0,WHITE);
-                DrawTexture(num4,0,10,WHITE);
+                DrawTexture(TexturasD[48],0,0,WHITE);
+                DrawTexture(TexturasD[57],0,10,WHITE);
             }
 
             else if(cena==16){
 
-                DrawTexture(salalab5,0,0,WHITE);
-                DrawTexture(num5,0,10,WHITE);
+                DrawTexture(TexturasD[49],0,0,WHITE);
+                DrawTexture(TexturasD[58],0,10,WHITE);
              
             }
 
             else if(cena==17){
 
-                DrawTexture(salalab6,0,0,WHITE);
-                DrawTexture(num6,0,10,WHITE);
+                DrawTexture(TexturasD[50],0,0,WHITE);
+                DrawTexture(TexturasD[59],0,10,WHITE);
                
 
             }
 
             else if(cena==18){
 
-                DrawTexture(salalab7,0,0,WHITE);
-                DrawTexture(num7,0,10,WHITE);
+                DrawTexture(TexturasD[51],0,0,WHITE);
+                DrawTexture(TexturasD[60],0,10,WHITE);
                 
 
             }
 
             else if(cena==19){
 
-                DrawTexture(salalab8,0,0,WHITE);
-                DrawTexture(num8,0,10,WHITE);
+                DrawTexture(TexturasD[52],0,0,WHITE);
+                DrawTexture(TexturasD[61],0,10,WHITE);
                
             }
 
             else if(cena==20){
 
-                DrawTexture(salalab9,0,0,WHITE);
-                DrawTexture(num9,0,10,WHITE);
+                DrawTexture(TexturasD[53],0,0,WHITE);
+                DrawTexture(TexturasD[62],0,10,WHITE);
              
 
             }
@@ -821,13 +728,13 @@ int main(void)
             if(cena==21){
 
                 ClearBackground(BLUE);
-                DrawTexture(mn6, 0, 0, WHITE);
+                DrawTexture(TexturasD[5], 0, 0, WHITE);
                 DrawText("Qual a senha?",450,200,150,BLACK);
-                DrawTextureRec(senha1, sourceRecs1, (Vector2){ btnS1rec.x, btnS1rec.y}, WHITE);
-                DrawTextureRec(senha2, sourceRecs2, (Vector2){ btnS2rec.x, btnS2rec.y}, WHITE);
-                DrawTextureRec(senha3, sourceRecs3, (Vector2){ btnS3rec.x, btnS3rec.y}, WHITE);
-                DrawTextureRec(senha4, sourceRecs4, (Vector2){ btnS4rec.x, btnS4rec.y}, WHITE);
-                DrawTextureRec(senha5, sourceRecs5, (Vector2){ btnS5rec.x, btnS5rec.y}, WHITE);
+                DrawTextureRec(TexturasD[37], sourceRecs1, (Vector2){ btnS1rec.x, btnS1rec.y}, WHITE);
+                DrawTextureRec(TexturasD[38], sourceRecs2, (Vector2){ btnS2rec.x, btnS2rec.y}, WHITE);
+                DrawTextureRec(TexturasD[39], sourceRecs3, (Vector2){ btnS3rec.x, btnS3rec.y}, WHITE);
+                DrawTextureRec(TexturasD[40], sourceRecs4, (Vector2){ btnS4rec.x, btnS4rec.y}, WHITE);
+                DrawTextureRec(TexturasD[41], sourceRecs5, (Vector2){ btnS5rec.x, btnS5rec.y}, WHITE);
 
             }
 
@@ -835,7 +742,7 @@ int main(void)
                 
                 framesCounter7++;
 
-                DrawTexture(final1,0,0,RAYWHITE);
+                DrawTexture(TexturasD[63],0,0,RAYWHITE);
 
                 if(framesCounter7<300)DrawText(TextSubtext("???????????????????????????????????", 0, framesCounter7/3), 200, 850, 60, BLACK);
                 if(framesCounter7>300&&framesCounter7<600)DrawText("Sabrina: ?????????  Então era você o saci Perêrê", 200, 850, 60,WHITE);
@@ -868,13 +775,13 @@ int main(void)
             else if(cena>0){
 
                 Vector2 vec = {nextPosition.x-200, nextPosition.y-250};
-                AnimPlayer(Player, FrameWidth, &frame, &Mov, &x, &y);
-                Rectangle Character = {FrameWidth*frame, Player.height/Mov, FrameWidth, (float) Player.height/4};     //PLAYER - INICIO DO LOOP;
-                DrawTextureRec(Player, Character, vec, RAYWHITE);
+                AnimPlayer(Texturas2D[6], FrameWidth, &frame, &Mov, &x, &y);
+                Rectangle Character = {FrameWidth*frame, Texturas2D[6].height/Mov, FrameWidth, (float) Texturas2D[6].height/4};     //PLAYER - INICIO DO LOOP;
+                DrawTextureRec(Texturas2D[6], Character, vec, RAYWHITE);
             } 
             
 
-            AnimItem(texturasDeItens, jogador.itens, 5, nextPosition.x - 200, nextPosition.y - 250);
+            AnimItem(Texturas2Ditens, jogador.itens, 5, nextPosition.x - 200, nextPosition.y - 250);
             
             EndDrawing();
         //----------------------------------------------------------------------------------
@@ -883,20 +790,13 @@ int main(void)
     UnloadSound(sound);
     UnloadMusicStream(music);
     CloseAudioDevice();
+
     //--------------------------------------------------------------------------------------
-    int i;
-    for(i=0;i<23;i++){
-        free(cenas[i].obstaculos);
-        free(cenas[i].portas);
-    }
-    free(cenas);
-    free(texturasDeItens);
-    for(i=0;i<64;i++){
-        UnloadTexture(texturas[i]);
-    }
-    for(i=0;i<6;i++){
-        UnloadTexture(texturas2d[i]);
-    }
+
+    freeCenas(cenas,23);
+    freeTexturasD(TexturasD);
+    freeTexturas2D(Texturas2D);
+    freeTexturas2DI(Texturas2Ditens);
 
     CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
