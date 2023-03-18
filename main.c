@@ -591,7 +591,7 @@ int main(void)
 
                 DrawTexture(TexturasD[15],0,0,WHITE);
                 DrawTexture(TexturasD[16],0,0,WHITE);
-                if(cenas[5].portas[2].check == 0) DrawText("O vizinho geralmente deixa a chave embaixo do vaso", 0, 0, 45, WHITE);
+                if(cenas[5].portas[2].check == 0) DrawText("O vizinho geralmente deixa a chave embaixo do vaso", 0, 45, 45, WHITE);
             }
              
             else if(cena==6){
@@ -633,7 +633,7 @@ int main(void)
                 patoHitbox.x = px;
                 patoHitbox.y = py;
                 DrawTexture(TexturasD[43],0,0,WHITE);
-                if(jogador.key[1]==false) DrawText("O pato parece estar com fome", 0, 0, 45, WHITE);
+                if(jogador.key[1]==false) DrawText("O pato parece estar com fome", 0, 45, 45, WHITE);
                 if(frameEsp1==0) DrawTexture(TexturasD[42],0,80,WHITE);
                 if(frameEsp1==0 && frameEsp2==2) {
                     DrawTexture(TexturasD[36],0,0,WHITE);
