@@ -1,6 +1,8 @@
 #ifndef COLISOES_PERS
 #define COLISOES_PERS
 
+#include "raylib.h"
+
 typedef struct{
     Rectangle area;
     int origem;

@@ -24,8 +24,8 @@
 .PHONY: all clean
 
 # Define required raylib variables
-PROJECT_NAME       ?= Game1
-RAYLIB_VERSION     ?= 3.8.0
+PROJECT_NAME       ?= OVizin
+RAYLIB_VERSION     ?= 5.0
 ## @TODO: Mude aqui para o caminho de onde está o raylib
 RAYLIB_PATH        ?= PASTA RAYLIB
 
