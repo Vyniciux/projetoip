@@ -52,6 +52,8 @@ void phaseTwo(Jogador *player, int *cenaAtual, Cenas *cena, Sound sound, int* pa
             if(player->itens[1] == true)PlaySound(sound);
             (*pato) = 1;
             player->itens[1] = false;
+            //player->posX = 1725;
+            //player-> posY = 535;
         }
     }
 }

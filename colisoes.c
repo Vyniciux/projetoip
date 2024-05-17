@@ -1,6 +1,4 @@
-#include "raylib.h"
 #include "colisoes.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 Cenas* criarCenas(int numCenas){
@@ -8,7 +6,7 @@ Cenas* criarCenas(int numCenas){
     Cenas* cenas = (Cenas*) malloc (numCenas * sizeof(Cenas));
 
     int i;
-    for(i=0;i<11;i++){
+    for(i=0;i<numCenas;i++){
         (cenas)[i].codigoCena = i;
     }
 
@@ -35,6 +33,8 @@ Cenas* criarCenas(int numCenas){
     (cenas)[18].qtdPortas = 2;
     (cenas)[19].qtdPortas = 2;
     (cenas)[20].qtdPortas = 2;
+    (cenas)[21].qtdPortas = 0;
+    (cenas)[22].qtdPortas = 0;
 
     Porta portas1[1] = {
         {{1900, 535, 60, 190}, 1, 2, 1, 60.0, 690.0}
@@ -291,7 +291,8 @@ Cenas* criarCenas(int numCenas){
     (cenas)[18].qtdObstaculos = 0;
     (cenas)[19].qtdObstaculos = 0;
     (cenas)[20].qtdObstaculos = 0;
-
+    (cenas)[21].qtdObstaculos = 0;
+    (cenas)[22].qtdObstaculos = 0;
 
     Rectangle obstaculos1[3]= {{160, 220, 370, 505}, 
                                {710, 220, 220, 155}, 
@@ -459,6 +460,5 @@ void freeCenas(Cenas* cenas,int numCenas){
         free(cenas[i].portas);
     }
     free(cenas);
-
 
 }

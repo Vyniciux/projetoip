@@ -3,6 +3,7 @@
 #include "animacao.h"
 #include "player.h"
 #include "textures.h"
+#include "fases.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -331,12 +332,12 @@ int main(void)
               {
                   //letrinha por letrinha
 
-                  framesCounter1++;
+                  framesCounter1 += 4;
                   
-                  if(framesCounter1 > 245){framesCounter2++;}
-                  if(framesCounter2 > 245){framesCounter3++;}
-                  if(framesCounter3 > 245){framesCounter4++;}
-                  if(framesCounter4 > 255){framesCounter5++;}
+                  if(framesCounter1 > 245){framesCounter2 += 4;}
+                  if(framesCounter2 > 245){framesCounter3 += 4;}
+                  if(framesCounter3 > 245){framesCounter4 += 4;}
+                  if(framesCounter4 > 255){framesCounter5 += 4;}
                   if(framesCounter5 > 293){framesCounter6++;}
                   
                   iniciajogo = true;
@@ -598,6 +599,7 @@ int main(void)
 
                 DrawTexture(TexturasD[13],0,0,WHITE );
                 DrawTexture(TexturasD[14],0,0,WHITE );
+                if(cenas[5].portas[2].check == 0) DrawText("Para interagir com os objetos encoste e pressione 'e'", 0, 45, 45, WHITE);
 
             }
 
@@ -627,13 +629,13 @@ int main(void)
                 AnimEspelho(Texturas2D[10], frameEsp1, 1000, 700);
                 AnimEspelho(Texturas2D[10], frameEsp2, 130, 700);
                 Vector2 vec2 = {px, py};
-                AnimPato(Texturas2D[8], FrameWidth2, &frame2, &Mov2, &px, &py, &nextPosition.x, &nextPosition.y, &Mov, PatoFlag);
+                AnimPato(Texturas2D[8], FrameWidth2, &frame2, &Mov2, &px, &py, &position.x, &position.y, &Mov, PatoFlag);
                 Rectangle Duck = {FrameWidth2*frame2, Texturas2D[8].height/Mov2, FrameWidth2, (float) Texturas2D[8].height/4};      //PATO - APENAS NA FASE DO PATO;
                 DrawTextureRec(Texturas2D[8], Duck, vec2, RAYWHITE);
                 patoHitbox.x = px;
                 patoHitbox.y = py;
                 DrawTexture(TexturasD[43],0,0,WHITE);
-                if(jogador.key[1]==false) DrawText("O pato parece estar com fome", 0, 45, 45, WHITE);
+                if(jogador.key[1]==false) { DrawText("O pato parece estar com fome", 0, 45, 45, WHITE);}
                 if(frameEsp1==0) DrawTexture(TexturasD[42],0,80,WHITE);
                 if(frameEsp1==0 && frameEsp2==2) {
                     DrawTexture(TexturasD[36],0,0,WHITE);
@@ -663,6 +665,7 @@ int main(void)
                 DrawTexture(TexturasD[45],0,0,WHITE);
                 DrawTexture(TexturasD[54],0,10,WHITE);
                 jogador.itens[2] = false;
+                DrawText("Memorize a sequência das salas na ordem correta", 0, 10, 20, WHITE);
 
             }
 
@@ -697,7 +700,6 @@ int main(void)
 
                 DrawTexture(TexturasD[50],0,0,WHITE);
                 DrawTexture(TexturasD[59],0,10,WHITE);
-               
 
             }
 
@@ -793,10 +795,10 @@ int main(void)
 
     //--------------------------------------------------------------------------------------
 
-    freeCenas(cenas,23);
-    freeTexturasD(TexturasD);
-    freeTexturas2D(Texturas2D);
-    freeTexturas2DI(Texturas2Ditens);
+    free(cenas);
+    free(TexturasD);
+    free(Texturas2D);
+    free(Texturas2Ditens);
 
     CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
