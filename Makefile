@@ -24,10 +24,10 @@
 .PHONY: all clean
 
 # Define required raylib variables
-PROJECT_NAME       ?= OVizin
-RAYLIB_VERSION     ?= 5.0
+PROJECT_NAME       = OVizin
+RAYLIB_VERSION     = 5.0
 ## @TODO: Mude aqui para o caminho de onde está o raylib
-RAYLIB_PATH        ?= PASTA RAYLIB
+RAYLIB_PATH        = raylib
 
 # Define compiler path on Windows
 COMPILER_PATH      ?= C:/raylib/mingw/bin
@@ -45,10 +45,10 @@ PLATFORM           ?= PLATFORM_DESKTOP
 # If there is a libraylib in both EXAMPLE_RUNTIME_PATH and RAYLIB_INSTALL_PATH, at runtime,
 # the library at EXAMPLE_RUNTIME_PATH, if present, will take precedence over the one at RAYLIB_INSTALL_PATH.
 # RAYLIB_INSTALL_PATH should be the desired full path to libraylib. No relative paths.
-DESTDIR ?= /usr/local
-RAYLIB_INSTALL_PATH ?= $(DESTDIR)/lib
+DESTDIR = raylib/src
+RAYLIB_INSTALL_PATH = $(DESTDIR)
 # RAYLIB_H_INSTALL_PATH locates the installed raylib header and associated source files.
-RAYLIB_H_INSTALL_PATH ?= $(DESTDIR)/include
+RAYLIB_H_INSTALL_PATH = $(DESTDIR)
 
 # Library type used for raylib: STATIC (.a) or SHARED (.so/.dll)
 RAYLIB_LIBTYPE        ?= STATIC
@@ -113,7 +113,7 @@ endif
 # This is not currently used by src/Makefile. Not sure of its origin or usage. Refer to wiki.
 # TODO: update install: target in src/Makefile for RPI, consider relation to LINUX.
 ifeq ($(PLATFORM),PLATFORM_RPI)
-    RAYLIB_PATH       ?= /home/pi/raylib
+    RAYLIB_PATH       = /raylib
 endif
 
 ifeq ($(PLATFORM),PLATFORM_WEB)
@@ -129,7 +129,7 @@ endif
 
 # Define raylib release directory for compiled library.
 # RAYLIB_RELEASE_PATH points to provided binaries or your freshly built version
-RAYLIB_RELEASE_PATH 	?= $(RAYLIB_PATH)/src
+RAYLIB_RELEASE_PATH 	= $(RAYLIB_PATH)/src
 
 # EXAMPLE_RUNTIME_PATH embeds a custom runtime location of libraylib.so or other desired libraries
 # into each example binary compiled with RAYLIB_LIBTYPE=SHARED. It defaults to RAYLIB_RELEASE_PATH
@@ -263,7 +263,7 @@ endif
 ifeq ($(PLATFORM),PLATFORM_DESKTOP)
     ifeq ($(PLATFORM_OS),BSD)
         # Consider -L$(RAYLIB_H_INSTALL_PATH)
-        INCLUDE_PATHS += -I/usr/local/include
+        INCLUDE_PATHS += -Iraylib/src
     endif
     ifeq ($(PLATFORM_OS),LINUX)
         # Reset everything.
@@ -358,7 +358,7 @@ OBJ_DIR = obj
 # Define all object files from source files
 SRC = $(call rwildcard, *.c, *.h)
 #OBJS = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-OBJS ?= *.c
+OBJS ?= source/*.c
 
 # For Android platform we call a custom Makefile.Android
 ifeq ($(PLATFORM),PLATFORM_ANDROID)
